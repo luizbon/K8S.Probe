@@ -1,0 +1,175 @@
+﻿apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo-probe-ns
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: worker-tcp
+  namespace: demo-probe-ns
+  labels:
+    app: demo-worker-tcp
+spec:
+  containers:
+  - name: demo-worker-tcp-healthy
+    image: demo-worker:v1
+    imagePullPolicy: Never
+    env:
+    - name: HEALTH_CHECK
+      value: "2"
+    - name: PROBE_PORT
+      value: "5000"
+    ports:
+    - name: hc-healthy
+      containerPort: 5000
+      hostPort: 5000
+    readinessProbe:
+      tcpSocket:
+        port: hc-healthy
+      initialDelaySeconds: 5
+      failureThreshold: 2
+      timeoutSeconds: 3
+      periodSeconds: 10
+    livenessProbe:
+      tcpSocket:
+        port: hc-healthy
+      initialDelaySeconds: 15
+      failureThreshold: 2
+      timeoutSeconds: 3
+      periodSeconds: 20
+  - name: demo-worker-tcp-degraded
+    image: demo-worker:v1
+    imagePullPolicy: Never
+    env:
+    - name: HEALTH_CHECK
+      value: "1"
+    - name: PROBE_PORT
+      value: "5001"
+    ports:
+    - name: hc-healthy
+      containerPort: 5001
+      hostPort: 5001
+    readinessProbe:
+      tcpSocket:
+        port: hc-healthy
+      initialDelaySeconds: 5
+      failureThreshold: 2
+      timeoutSeconds: 3
+      periodSeconds: 10
+    livenessProbe:
+      tcpSocket:
+        port: hc-healthy
+      initialDelaySeconds: 15
+      failureThreshold: 2
+      timeoutSeconds: 3
+      periodSeconds: 20
+  - name: demo-worker-tcp-unhealthy
+    image: demo-worker:v1
+    imagePullPolicy: Never
+    env:
+    - name: HEALTH_CHECK
+      value: "0"
+    - name: PROBE_PORT
+      value: "5002"
+    ports:
+    - name: hc-unhealthy
+      containerPort: 5002
+      hostPort: 5002
+    readinessProbe:
+      tcpSocket:
+        port: hc-unhealthy
+      initialDelaySeconds: 5
+      failureThreshold: 2
+      timeoutSeconds: 3
+      periodSeconds: 10
+    livenessProbe:
+      tcpSocket:
+        port: hc-unhealthy
+      initialDelaySeconds: 15
+      failureThreshold: 2
+      timeoutSeconds: 3
+      periodSeconds: 20
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: worker-command
+  namespace: demo-probe-ns
+  labels:
+    app: demo-worker-command
+spec:
+  containers:
+  - name: demo-worker-command-healthy
+    image: demo-worker:v1
+    imagePullPolicy: Never
+    env:
+    - name: HEALTH_CHECK
+      value: "2"
+    readinessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 5
+      failureThreshold: 2
+      timeoutSeconds: 3
+      periodSeconds: 10
+    livenessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 15
+      failureThreshold: 2
+      timeoutSeconds: 3
+      periodSeconds: 20
+  - name: demo-worker-command-degraded
+    image: demo-worker:v1
+    imagePullPolicy: Never
+    env:
+    - name: HEALTH_CHECK
+      value: "1"
+    readinessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 5
+      failureThreshold: 2
+      timeoutSeconds: 3
+      periodSeconds: 10
+    livenessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 15
+      failureThreshold: 2
+      timeoutSeconds: 3
+      periodSeconds: 20
+  - name: demo-worker-command-unhealthy
+    image: demo-worker:v1
+    imagePullPolicy: Never
+    env:
+    - name: HEALTH_CHECK
+      value: "0"
+    readinessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 5
+      failureThreshold: 2
+      timeoutSeconds: 3
+      periodSeconds: 10
+    livenessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 15
+      failureThreshold: 2
+      timeoutSeconds: 3
+      periodSeconds: 20
+    

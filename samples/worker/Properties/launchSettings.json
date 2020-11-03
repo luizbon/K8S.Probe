@@ -1,0 +1,17 @@
+{
+  "profiles": {
+    "worker": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "environmentVariables": {
+        "HEALTH_CHECK": "2",
+        "PROBE_PORT": "5000" 
+      }
+    }
+  }
+}
