@@ -9,6 +9,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "K8S.Probe", "src\K8S.Probe\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "worker", "samples\worker\worker.csproj", "{25713C1C-2D12-40BB-8191-2D7F5A271D8E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{A66C499B-C2F7-41D1-862D-EFE9357995B5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{07AE5B6F-4B4F-488F-9BC0-C5644187A0BD}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+		.github\workflows\release.yml = .github\workflows\release.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +37,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{25713C1C-2D12-40BB-8191-2D7F5A271D8E} = {EFDAAA1F-0A1E-41A9-9637-4046D3F131B7}
+		{07AE5B6F-4B4F-488F-9BC0-C5644187A0BD} = {A66C499B-C2F7-41D1-862D-EFE9357995B5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5DC8FBC2-E034-45D8-AD15-B264DAF169E9}

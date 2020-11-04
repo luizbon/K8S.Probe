@@ -1,0 +1,36 @@
+name: K8S Probe - Release
+
+on:
+  workflow_run:
+    workflows: ['K8S Probe - Build']
+    branches: [ master ]
+    types:
+      - completed
+
+jobs:
+  publish-nuget:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Get Git Version
+      uses: docker://gittools/gitversion:5.0.2-linux-centos-7-netcoreapp2.2
+      with:
+        args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo $GitVersion_NuGetVersion > /github/workspace/version.txt\""
+    - name: Setup .Net Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '3.1.x'
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    - name: Publish to NuGet
+      uses: brandedoutcast/publish-nuget@v2
+      with:
+        PROJECT_FILE_PATH: src/K8S.Probe/K8S.Probe.csproj
+        VERSION_FILE_PATH: /home/runner/work/K8S.Probe/K8S.Probe/version.txt
+        INCLUDE_SYMBOLS: true
+        NUGET_KEY: ${{secrets.NUGET_API_KEY}}

@@ -3,6 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
+    <PackageId>K8S.Probe</PackageId>
+    <Version>0.0.1</Version>
+    <Authors>Luiz Bon</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
