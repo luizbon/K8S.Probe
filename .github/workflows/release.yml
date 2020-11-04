@@ -33,5 +33,4 @@ jobs:
         PROJECT_FILE_PATH: src/K8S.Probe/K8S.Probe.csproj
         VERSION_FILE_PATH: /home/runner/work/K8S.Probe/K8S.Probe/version.txt
         VERSION_REGEX: ^(.*)$
-        INCLUDE_SYMBOLS: true
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
