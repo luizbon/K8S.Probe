@@ -57,7 +57,7 @@ outputs:
 
 runs:
     using: node12
-    main: publish-nuget.js
+    main: index.js
 
 branding:
     icon: package
