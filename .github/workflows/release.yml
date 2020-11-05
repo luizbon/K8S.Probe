@@ -24,7 +24,7 @@ jobs:
       with:
         dotnet-version: '3.1.x'
     - name: Publish to NuGet
-      uses: ./publish-nuget/
+      uses: ./.github/actions/publish-nuget/
       with:
         PROJECT_FILE_PATH: src/K8S.Probe/K8S.Probe.csproj
         VERSION_FILE_PATH: /home/runner/work/K8S.Probe/K8S.Probe/version.txt
