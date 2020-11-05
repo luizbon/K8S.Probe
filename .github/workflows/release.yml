@@ -23,14 +23,11 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '3.1.x'
-    - name: Install dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
     - name: Publish to NuGet
-      uses: brandedoutcast/publish-nuget@v2
+      uses: ./publish-nuget.yml
       with:
         PROJECT_FILE_PATH: src/K8S.Probe/K8S.Probe.csproj
         VERSION_FILE_PATH: /home/runner/work/K8S.Probe/K8S.Probe/version.txt
         VERSION_REGEX: ^(.*)$
+        INCLUDE_SYMBOLS: true
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
