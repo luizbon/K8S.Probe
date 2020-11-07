@@ -6,6 +6,13 @@
     <PackageId>K8S.Probe</PackageId>
     <Authors>Luiz Bon</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Description>Kubernetes Probes</Description>
+    <ProjectUrl>https://github.com/luizbon/K8S.Probe</ProjectUrl>
+    <Tags>HealthCheck;Health Check;Kubernetes;K8S;Probe</Tags>
+    <Repository>
+      <Url>https://github.com/luizbon/K8S.Probe.git</Url>
+      <Type>git</Type>
+    </Repository>
   </PropertyGroup>
 
   <ItemGroup>
